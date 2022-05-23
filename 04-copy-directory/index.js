@@ -2,8 +2,9 @@ const fs = require('fs')
 const path = require('path')
 const { mkdir } = require('fs')
 const { copyFile, constants } = require('node:fs');
-
 let rimraf = require("rimraf");
+
+
     rimraf(`${__dirname}/04-copy-directory/files-copy`, (err) => {
         if (err) return
     });
@@ -18,7 +19,6 @@ function copyDir() {
         for (let filename of filenames){
             function callback(err) {
                  if (err) throw err;
-                console.log('source.txt was copied to destination.txt');
             }
 
             copyFile(`${__dirname}/files/${filename}`, `${__dirname}/files-copy/${filename}`, callback);
