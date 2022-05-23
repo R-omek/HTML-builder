@@ -1,19 +1,14 @@
-const procces = require('node:process')
-const fs = require('fs')
-const path = require('path');
-const { stdout, stdin } = require('node:process');
-const { writeFile, appendFile } = require('node:fs');
-const { text } = require('stream/consumers');
+const fs = require('fs');
 
-
-process.on('exit', code => {
-    if (code === 0) {
-        stdout.write('Hello.Write a text\n')
-        stdin.on('data', text => {
-        })    } else {
-        stderr.write(`Что-то пошло не так. Программа завершилась с кодом ${code}`);
+fs.stat("./03-files-in-folder/secret-folder", (error, stats) => {
+    if (error) {
+      console.log(error);
     }
-});
+    else {
+      console.log("Stats object for: example_directory.txt");
+      console.log(stats);
+    }
+  });
 
 
 
