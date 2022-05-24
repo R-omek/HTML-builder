@@ -2,12 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const { mkdir } = require('fs')
 const { copyFile, constants } = require('node:fs');
-let rimraf = require("rimraf");
 
-
-    rimraf(`${__dirname}/04-copy-directory/files-copy`, (err) => {
-        if (err) return
-    });
 
 function copyDir() {
     fs.promises.readdir('./04-copy-directory/files')
