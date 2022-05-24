@@ -1,6 +1,5 @@
 const fs = require('fs')
 const path = require('path');
-const _default = require('style-loader');
 
 
 
