@@ -131,6 +131,28 @@ function copyHtmlTemplates() {
         console.log(err)
     })
 }
+function changeTemplateTags(){ 
+    fs.readFile(`${__dirname}/components/header.html`, (err, componentContent1) => {
+        if (err) throw err;
+        fs.readFile(`${__dirname}/components/articles.html`, (err, componentContent2) => {
+            if (err) throw err;
+            fs.readFile(`${__dirname}/components/footer.html`, (err, componentContent3) => {
+                if (err) throw err;
+                fs.readFile(`${__dirname}/project-dist/index.html`, (err, data) => {
+                    if (err) throw err;
+                    const templateChenger1 = data.toString().replace('{{header}}', componentContent1).toString().replace('{{articles}}', componentContent2).toString().replace('{{footer}}', componentContent3.toString())
+                    fs.writeFile(
+                        path.join(`${__dirname}/project-dist`, 'index.html'),
+                        templateChenger1,
+                        (err) => {
+                            if (err) throw err
+                        })
+                })
+            })
+        })
+    })
+}
+
 
 
 checkIfFolderExist()
@@ -141,15 +163,7 @@ copyImg()
 copySvg()
 copyHtmlTemplates()
 bundleStyles()
-
-
-fs.readFile(`${__dirname}/project-dist/index.html`, (err, data) => {
-    if (err) throw err;
-    for(const char of data.toString().split(/$\{{header}}/)){
-        console.log(char)
-    }
-})
-
+changeTemplateTags()
 
 
 
