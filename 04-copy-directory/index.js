@@ -4,8 +4,7 @@ const { mkdir } = require('fs')
 const { copyFile, constants } = require('node:fs');
 
 
-fs.rm(`${__dirname}/files-copy`, { recursive: true }, () => console.log('done'));
-copyDir()
+
 function copyDir() {
     fs.promises.readdir('./04-copy-directory/files')
 
@@ -13,6 +12,7 @@ function copyDir() {
         mkdir(`${__dirname}/files-copy`, { recursive: true }, (err) => {
             if (err) throw err;
         });
+        
         for (let filename of filenames){
             function callback(err) {
                  if (err) throw err;
@@ -26,5 +26,17 @@ function copyDir() {
         console.log(err)
     })
 }
-
+function removeFilesFtomCopyDir(){
+    fs.readdir(`${__dirname}/files-copy`, (err, files) => {
+        if (err) throw err;
+      
+        for (const file of files) {
+          fs.unlink(path.join(`${__dirname}/files-copy`, file), err => {
+            if (err) throw err;
+          });
+        }
+      });
+}
+removeFilesFtomCopyDir()
 copyDir()
+
