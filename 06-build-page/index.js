@@ -131,26 +131,59 @@ function copyHtmlTemplates() {
     })
 }
 function changeTemplateTags(){ 
-    fs.readFile(`${__dirname}/components/header.html`, (err, componentContent1) => {
-        if (err) throw err;
-        fs.readFile(`${__dirname}/components/articles.html`, (err, componentContent2) => {
+    let amountOfFiles = 3
+    fs.readdir(`${__dirname}/components`, (err, files) => {
+        amountOfFiles = files.length;
+
+    if(amountOfFiles === 4){
+        fs.readFile(`${__dirname}/components/header.html`, (err, componentContent1) => {
             if (err) throw err;
-            fs.readFile(`${__dirname}/components/footer.html`, (err, componentContent3) => {
+            fs.readFile(`${__dirname}/components/articles.html`, (err, componentContent2) => {
                 if (err) throw err;
-                fs.readFile(`${__dirname}/project-dist/index.html`, (err, data) => {
+                fs.readFile(`${__dirname}/components/footer.html`, (err, componentContent3) => {
                     if (err) throw err;
-                    const templateChenger1 = data.toString().replace('{{header}}', componentContent1).toString().replace('{{articles}}', componentContent2).toString().replace('{{footer}}', componentContent3.toString())
-                    fs.writeFile(
-                        path.join(`${__dirname}/project-dist`, 'index.html'),
-                        templateChenger1,
-                        (err) => {
-                            if (err) throw err
+                    fs.readFile(`${__dirname}/components/about.html`, (err, componentContent4) => {
+                        if (err) throw err;
+                        fs.readFile(`${__dirname}/project-dist/index.html`, (err, data) => {
+                            if (err) throw err;
+                            const templateChenger1 = data.toString().replace('{{header}}', componentContent1).toString().replace('{{articles}}', componentContent2).toString().replace('{{footer}}', componentContent3).toString().replace('{{about}}', componentContent4.toString())
+                            fs.writeFile(
+                                path.join(`${__dirname}/project-dist`, 'index.html'),
+                                templateChenger1,
+                                (err) => {
+                                    if (err) throw err
+                                })
+                            
+                        })
+                    })
+                })
+            })
+        })
+    } else {
+        fs.readFile(`${__dirname}/components/header.html`, (err, componentContent1) => {
+            if (err) throw err;
+            fs.readFile(`${__dirname}/components/articles.html`, (err, componentContent2) => {
+                if (err) throw err;
+                fs.readFile(`${__dirname}/components/footer.html`, (err, componentContent3) => {
+                    if (err) throw err;
+                        fs.readFile(`${__dirname}/project-dist/index.html`, (err, data) => {
+                            if (err) throw err;
+                            const templateChenger1 = data.toString().replace('{{header}}', componentContent1).toString().replace('{{articles}}', componentContent2).toString().replace('{{footer}}', componentContent3.toString())
+                            fs.writeFile(
+                                path.join(`${__dirname}/project-dist`, 'index.html'),
+                                templateChenger1,
+                                (err) => {
+                                    if (err) throw err
+                                })
                         })
                 })
             })
         })
-    })
+    }
+
+});
 }
+
 
 
 

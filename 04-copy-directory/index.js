@@ -4,6 +4,8 @@ const { mkdir } = require('fs')
 const { copyFile, constants } = require('node:fs');
 
 
+fs.rm(`${__dirname}/files-copy`, { recursive: true }, () => console.log('done'));
+copyDir()
 function copyDir() {
     fs.promises.readdir('./04-copy-directory/files')
 
